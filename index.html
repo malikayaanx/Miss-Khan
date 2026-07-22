@@ -1,360 +1,740 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Mrs. Khan</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-
-background:#050505;
-overflow:hidden;
-font-family:Inter,sans-serif;
-height:100vh;
-color:white;
-
-}
-
-canvas{
-
-position:fixed;
-top:0;
-left:0;
-
-}
-
-#moon{
-
-position:absolute;
-top:80px;
-right:130px;
-
-width:170px;
-height:170px;
-
-border-radius:50%;
-
-background:white;
-
-box-shadow:
-
-0 0 60px rgba(255,255,255,.35),
-0 0 120px rgba(255,255,255,.18),
-0 0 250px rgba(255,255,255,.08);
-
-opacity:.92;
-
-}
-
-#lantern{
-
-position:absolute;
-
-left:50%;
-top:100px;
-
-transform:translateX(-50%);
-
-animation:swing 5s ease-in-out infinite;
-
-}
-
-.rope{
-
-width:2px;
-height:110px;
-background:#777;
-margin:auto;
-
-}
-
-.light{
-
-width:70px;
-height:95px;
-
-border-radius:12px;
-
-background:linear-gradient(#2b2b2b,#151515);
-
-border:2px solid #555;
-
-position:relative;
-
-overflow:hidden;
-
-}
-
-.light:before{
-
-content:"";
-
-position:absolute;
-
-left:50%;
-top:16px;
-
-transform:translateX(-50%);
-
-width:20px;
-height:45px;
-
-border-radius:50%;
-
-background:#ffd676;
-
-filter:blur(4px);
-
-animation:flicker 1.4s infinite;
-
-}
-
-.glow{
-
-position:absolute;
-
-left:50%;
-top:120px;
-
-transform:translateX(-50%);
-
-width:300px;
-height:300px;
-
-border-radius:50%;
-
-background:radial-gradient(circle,
-rgba(255,220,140,.35),
-rgba(255,220,140,.06),
-transparent);
-
-filter:blur(20px);
-
-animation:pulse 4s infinite;
-
-}
-
-#sign{
-
-position:absolute;
-
-left:50%;
-bottom:120px;
-
-transform:translateX(-50%);
-
-padding:20px 60px;
-
-border:2px solid rgba(198,164,92,.45);
-
-background:rgba(25,18,8,.6);
-
-backdrop-filter:blur(8px);
-
-font-size:42px;
-
-font-family:"Cormorant Garamond",serif;
-
-letter-spacing:3px;
-
-color:#f5e8c6;
-
-opacity:0;
-
-animation:appear 3s forwards;
-
-animation-delay:6s;
-
-}
-
-.firefly{
-
-position:absolute;
-
-width:7px;
-height:7px;
-
-background:#ffe8a3;
-
-border-radius:50%;
-
-box-shadow:0 0 12px gold;
-
-animation:fly linear infinite;
-
-}
-
-@keyframes swing{
-
-0%{transform:translateX(-50%) rotate(-4deg);}
-50%{transform:translateX(-50%) rotate(4deg);}
-100%{transform:translateX(-50%) rotate(-4deg);}
-
-}
-
-@keyframes flicker{
-
-0%{opacity:.8;}
-30%{opacity:1;}
-50%{opacity:.7;}
-80%{opacity:1;}
-100%{opacity:.85;}
-
-}
-
-@keyframes pulse{
-
-0%{transform:translateX(-50%) scale(.95);}
-50%{transform:translateX(-50%) scale(1.06);}
-100%{transform:translateX(-50%) scale(.95);}
-
-}
-
-@keyframes appear{
-
-from{
-
-opacity:0;
-transform:translate(-50%,40px);
-
-}
-
-to{
-
-opacity:1;
-transform:translate(-50%,0);
-
-}
-
-}
-
-@keyframes fly{
-
-from{
-
-transform:translate(0,0);
-
-}
-
-to{
-
-transform:translate(-300px,-150px);
-
-}
-
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Cute Little Request 💖</title>
+  
+  <!-- Playful Cute Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. CSS VARIABLES & PASTEL CUTE THEMING
+       ========================================================================== */
+    :root {
+      --primary-pink: #ff6b8b;
+      --primary-hover: #ff4770;
+      --pink-glow: rgba(255, 107, 139, 0.4);
+      
+      --accent-purple: #a29bfe;
+      --accent-yellow: #ffeaa7;
+      
+      --bg-gradient-1: #ffe6ea;
+      --bg-gradient-2: #f0e6ff;
+      --bg-gradient-3: #ffeef2;
+      --bg-gradient-4: #e8f0fe;
+      
+      --text-main: #4a334e;
+      --text-muted: #8c6f94;
+      
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.9);
+      --glass-shadow: 0 20px 40px rgba(238, 150, 175, 0.25);
+      --glass-blur: blur(16px);
+
+      --font-heading: 'Fredoka', cursive, sans-serif;
+      --font-body: 'Nunito', sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --primary-pink: #ff7597;
+      --primary-hover: #ff527b;
+      --pink-glow: rgba(255, 117, 151, 0.35);
+      
+      --bg-gradient-1: #2a1b2a;
+      --bg-gradient-2: #1e1b2e;
+      --bg-gradient-3: #2d1825;
+      --bg-gradient-4: #191c2e;
+      
+      --text-main: #fce8f0;
+      --text-muted: #c9afc4;
+      
+      --glass-bg: rgba(40, 28, 42, 0.82);
+      --glass-border: rgba(255, 182, 193, 0.2);
+      --glass-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ==========================================================================
+       2. GLOBAL RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      background: linear-gradient(-45deg, var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-3), var(--bg-gradient-4));
+      background-size: 300% 300%;
+      animation: gradientBG 15s ease infinite;
+      cursor: default;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Canvas Overlay Layers */
+    #cursor-canvas, #bg-canvas, #fx-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+    }
+    #cursor-canvas { z-index: 9999; }
+    #bg-canvas { z-index: 1; }
+    #fx-canvas { z-index: 1000; }
+
+    /* ==========================================================================
+       3. UI CONTROLS & UTILITIES
+       ========================================================================== */
+    .top-controls {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 100;
+    }
+
+    .icon-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 2px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .icon-btn:hover {
+      transform: scale(1.12) rotate(15deg);
+    }
+
+    /* Cute Glass Card */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 3px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: 32px;
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      max-width: 520px;
+      width: 90%;
+      margin: 0 auto;
+      animation: floatCard 6s ease-in-out infinite;
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .cute-badge {
+      display: inline-block;
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      animation: pulseHeart 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulseHeart {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.18); }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 36px;
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border-radius: 25px;
+      cursor: pointer;
+      outline: none;
+      position: relative;
+      border: none;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ff85a1, var(--primary-pink));
+      color: #ffffff;
+      box-shadow: 0 8px 25px var(--pink-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.04);
+      background: linear-gradient(135deg, #ff94b0, var(--primary-hover));
+      box-shadow: 0 12px 30px var(--pink-glow);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--text-main);
+      border: 2px solid var(--accent-purple);
+    }
+
+    /* ==========================================================================
+       4. SCREEN MANAGEMENT & VIEWS
+       ========================================================================== */
+    .screen-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .screen.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Welcome Screen */
+    .cute-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--primary-pink);
+      margin-bottom: 12px;
+    }
+
+    .cute-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    /* Proposal Main */
+    .question-container {
+      margin-bottom: 20px;
+      pointer-events: none;
+    }
+
+    .question-text {
+      font-family: var(--font-heading);
+      font-size: clamp(1.35rem, 3.5vw, 1.85rem);
+      line-height: 1.4;
+      color: var(--text-main);
+    }
+
+    /* Play Area Inside Card */
+    .btn-group {
+      position: relative;
+      width: 100%;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    #btn-yes {
+      position: relative;
+      z-index: 10;
+    }
+
+    #btn-no {
+      position: relative;
+      z-index: 100;
+      transition: left 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), top 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      will-change: left, top;
+    }
+
+    #btn-no.escaped-mode {
+      position: absolute !important;
+      margin: 0 !important;
+    }
+
+    /* Celebration Screen */
+    .celebration-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.3rem, 6vw, 3.4rem);
+      color: var(--primary-pink);
+      margin-bottom: 16px;
+    }
+
+    .celebration-desc {
+      font-family: var(--font-body);
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    /* ==========================================================================
+       5. FOOTER
+       ========================================================================== */
+    footer {
+      position: fixed;
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      z-index: 100;
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 600px) {
+      .glass-card {
+        padding: 32px 20px;
+      }
+      .btn {
+        padding: 12px 28px;
+        font-size: 1rem;
+      }
+      .btn-group {
+        height: 170px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<canvas id="stars"></canvas>
+  <!-- Canvas Elements -->
+  <canvas id="cursor-canvas"></canvas>
+  <canvas id="bg-canvas"></canvas>
+  <canvas id="fx-canvas"></canvas>
 
-<div id="moon"></div>
+  <!-- Top Controls -->
+  <div class="top-controls">
+    <button class="icon-btn" id="theme-toggle" aria-label="Toggle Theme">🌸</button>
+  </div>
 
-<div id="lantern">
+  <!-- Screen Container -->
+  <main class="screen-container">
 
-<div class="rope"></div>
+    <!-- SCREEN 1: WELCOME SCREEN -->
+    <section id="screen-welcome" class="screen active">
+      <div class="glass-card">
+        <div class="cute-badge">💌</div>
+        <h1 class="cute-title">A Innocent Request</h1>
+        <p class="cute-subtitle">"I have a  question for you Malik Shaab..."</p>
+        <button id="btn-open-heart" class="btn btn-primary">
+          Open Envelope ✨
+        </button>
+      </div>
+    </section>
 
-<div class="light"></div>
+    <!-- SCREEN 2: MAIN PROPOSAL SCREEN -->
+    <section id="screen-proposal" class="screen">
+      <div class="glass-card" id="proposal-card">
+        <div class="cute-badge">🎀</div>
+        <div class="question-container">
+          <p class="question-text">Would you care to join me for a date on 25th July 2026?</p>
+        </div>
 
-<div class="glow"></div>
+        <div class="btn-group" id="proposal-btn-group">
+          <button id="btn-yes" class="btn btn-primary">Yes! 💕</button>
+          <button id="btn-no" class="btn btn-secondary">No 🙈</button>
+        </div>
+      </div>
+    </section>
 
-</div>
+    <!-- SCREEN 3: FINAL CELEBRATION SCREEN -->
+    <section id="screen-celebration" class="screen">
+      <div class="glass-card">
+        <div class="cute-badge">🌸</div>
+        <h1 class="celebration-title">Yaaay! Thank You!</h1>
+        <p class="celebration-desc">
+          I will be waiting, Miss Khan! ✨
+        </p>
+      </div>
+    </section>
 
-<div id="sign">
+  </main>
 
-For Mrs. Khan
+  <!-- Footer -->
+  <footer>
+    Made with 💕 just for you
+  </footer>
 
-</div>
+  <!-- ==========================================================================
+       JAVASCRIPT LOGIC
+       ========================================================================== -->
+  <script>
+    // --- SOUND EFFECTS ---
+    class SoundFX {
+      constructor() { this.ctx = null; }
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.ctx = new AudioContext();
+        }
+      }
+      playPop() {
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(350, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(700, this.ctx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.08);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.08);
+      }
+      playSparkle() {
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach((freq, idx) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.05, now + idx * 0.05);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.05 + 0.3);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now + idx * 0.05);
+          osc.stop(now + idx * 0.05 + 0.3);
+        });
+      }
+    }
+    const sfx = new SoundFX();
 
-<script>
+    // --- CUTE HEART & SPARKLE CURSOR TRAIL ---
+    class CursorEngine {
+      constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+        window.addEventListener('pointermove', (e) => {
+          if (Math.random() > 0.25) {
+            this.particles.push({
+              x: e.clientX, y: e.clientY,
+              size: Math.random() * 10 + 8,
+              vx: (Math.random() - 0.5) * 1.5,
+              vy: (Math.random() - 0.5) * 1.5 - 0.8,
+              alpha: 1,
+              rotation: Math.random() * Math.PI,
+              type: Math.random() > 0.4 ? 'heart' : 'sparkle'
+            });
+          }
+        });
+        this.render();
+      }
+      resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+      }
+      drawHeart(x, y, size) {
+        this.ctx.beginPath();
+        const topCurveHeight = size * 0.3;
+        this.ctx.moveTo(x, y + topCurveHeight);
+        this.ctx.bezierCurveTo(x, y, x - size / 2, y, x - size / 2, y + topCurveHeight);
+        this.ctx.bezierCurveTo(x - size / 2, y + (size + topCurveHeight) / 2, x, y + size, x, y + size);
+        this.ctx.bezierCurveTo(x, y + size, x + size / 2, y + (size + topCurveHeight) / 2, x + size / 2, y + topCurveHeight);
+        this.ctx.bezierCurveTo(x + size / 2, y, x, y, x, y + topCurveHeight);
+        this.ctx.closePath();
+        this.ctx.fill();
+      }
+      render() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+          const p = this.particles[i];
+          p.x += p.vx; p.y += p.vy; p.alpha -= 0.025;
+          if (p.alpha <= 0) { this.particles.splice(i, 1); continue; }
+          this.ctx.save();
+          this.ctx.globalAlpha = p.alpha;
+          this.ctx.fillStyle = '#ff85a1';
+          if (p.type === 'heart') {
+            this.drawHeart(p.x, p.y, p.size);
+          } else {
+            this.ctx.fillStyle = '#ffeaa7';
+            this.ctx.beginPath();
+            this.ctx.arc(p.x, p.y, p.size / 3, 0, Math.PI * 2);
+            this.ctx.fill();
+          }
+          this.ctx.restore();
+        }
+        requestAnimationFrame(() => this.render());
+      }
+    }
 
-const canvas=document.getElementById("stars");
+    // --- AMBIENT FLOATING BUBBLES ENGINE ---
+    class BackgroundEngine {
+      constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
+        this.ctx = this.canvas.getContext('2d');
+        this.items = [];
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+        for (let i = 0; i < 25; i++) {
+          this.items.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            size: Math.random() * 16 + 8,
+            speedY: Math.random() * 0.5 + 0.2,
+            opacity: Math.random() * 0.35 + 0.15
+          });
+        }
+        this.render();
+      }
+      resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+      }
+      render() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.items.forEach(item => {
+          item.y -= item.speedY;
+          if (item.y < -20) { item.y = this.canvas.height + 20; item.x = Math.random() * this.canvas.width; }
+          this.ctx.save();
+          this.ctx.globalAlpha = item.opacity;
+          this.ctx.fillStyle = '#ffb6c1';
+          this.ctx.beginPath();
+          this.ctx.arc(item.x, item.y, item.size, 0, Math.PI * 2);
+          this.ctx.fill();
+          this.ctx.restore();
+        });
+        requestAnimationFrame(() => this.render());
+      }
+    }
 
-const ctx=canvas.getContext("2d");
+    // --- CELEBRATION HEART CONFETTI ENGINE ---
+    class HeartShowerEngine {
+      constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
+        this.ctx = this.canvas.getContext('2d');
+        this.items = [];
+        this.active = false;
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+      }
+      resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+      }
+      startShower() {
+        this.active = true;
+        const colors = ['#ff6b8b', '#ff85a1', '#a29bfe', '#ffeaa7', '#ffffff'];
 
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+        for (let i = 0; i < 90; i++) {
+          this.items.push({
+            x: Math.random() * this.canvas.width,
+            y: Math.random() * -this.canvas.height,
+            size: Math.random() * 14 + 10,
+            vy: Math.random() * 2.5 + 1.5,
+            vx: (Math.random() - 0.5) * 2,
+            color: colors[Math.floor(Math.random() * colors.length)]
+          });
+        }
+        this.loop();
+      }
 
-let stars=[];
+      loop() {
+        if (!this.active) return;
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-for(let i=0;i<250;i++){
+        this.items.forEach((p) => {
+          p.y += p.vy;
+          p.x += Math.sin(p.y * 0.015) + p.vx;
 
-stars.push({
+          if (p.y > this.canvas.height + 30) {
+            p.y = -20;
+            p.x = Math.random() * this.canvas.width;
+          }
 
-x:Math.random()*canvas.width,
+          this.ctx.save();
+          this.ctx.fillStyle = p.color;
+          this.ctx.beginPath();
+          this.ctx.arc(p.x, p.y, p.size / 2, 0, Math.PI * 2);
+          this.ctx.fill();
+          this.ctx.restore();
+        });
 
-y:Math.random()*canvas.height,
+        requestAnimationFrame(() => this.loop());
+      }
+    }
 
-r:Math.random()*2,
+    // --- PROPOSAL APP CONTROLLER ---
+    class ProposalApp {
+      constructor() {
+        this.welcomeScreen = document.getElementById('screen-welcome');
+        this.proposalScreen = document.getElementById('screen-proposal');
+        this.celebrationScreen = document.getElementById('screen-celebration');
+        
+        this.btnGroup = document.getElementById('proposal-btn-group');
+        this.btnOpenHeart = document.getElementById('btn-open-heart');
+        this.btnYes = document.getElementById('btn-yes');
+        this.btnNo = document.getElementById('btn-no');
 
-a:Math.random()
+        this.themeToggleBtn = document.getElementById('theme-toggle');
+        this.isEscapingMode = false;
 
-});
+        this.heartShower = new HeartShowerEngine('fx-canvas');
+        this.init();
+      }
 
-}
+      init() {
+        new CursorEngine('cursor-canvas');
+        new BackgroundEngine('bg-canvas');
 
-function draw(){
+        this.btnOpenHeart.addEventListener('click', () => {
+          sfx.init();
+          sfx.playPop();
+          this.transitionToScreen(this.welcomeScreen, this.proposalScreen);
+        });
 
-ctx.clearRect(0,0,canvas.width,canvas.height);
+        this.themeToggleBtn.addEventListener('click', () => {
+          if (document.body.getAttribute('data-theme') === 'dark') {
+            document.body.removeAttribute('data-theme');
+            this.themeToggleBtn.textContent = '🌸';
+          } else {
+            document.body.setAttribute('data-theme', 'dark');
+            this.themeToggleBtn.textContent = '🌙';
+          }
+        });
 
-stars.forEach(s=>{
+        this.btnYes.addEventListener('click', () => this.handleYesClick());
 
-ctx.beginPath();
+        window.addEventListener('mousemove', (e) => this.checkNoHoverProximity(e));
+        
+        this.btnNo.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          this.executeNoMove();
+        }, { passive: false });
+        
+        this.btnNo.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.executeNoMove();
+        });
+      }
 
-ctx.fillStyle="rgba(255,255,255,"+(0.3+Math.random()*0.7)+")";
+      transitionToScreen(from, to, callback) {
+        from.classList.remove('active');
+        setTimeout(() => {
+          to.classList.add('active');
+          if (callback) callback();
+        }, 500);
+      }
 
-ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      checkNoHoverProximity(e) {
+        if (!this.proposalScreen.classList.contains('active')) return;
 
-ctx.fill();
+        const rect = this.btnNo.getBoundingClientRect();
+        const dist = Math.hypot(e.clientX - (rect.left + rect.width / 2), e.clientY - (rect.top + rect.height / 2));
+        
+        if (dist < 75) {
+          this.executeNoMove();
+        }
+      }
 
-});
+      executeNoMove() {
+        sfx.playPop();
 
-requestAnimationFrame(draw);
+        const groupRect = this.btnGroup.getBoundingClientRect();
+        const yesRect = this.btnYes.getBoundingClientRect();
+        const noRect = this.btnNo.getBoundingClientRect();
 
-}
+        if (!this.isEscapingMode) {
+          const initialLeft = noRect.left - groupRect.left;
+          const initialTop = noRect.top - groupRect.top;
+          
+          this.isEscapingMode = true;
+          this.btnNo.classList.add('escaped-mode');
+          
+          this.btnNo.style.left = `${initialLeft}px`;
+          this.btnNo.style.top = `${initialTop}px`;
+        }
 
-draw();
+        // Strict boundary containment inside `.btn-group`
+        const maxAllowedX = groupRect.width - noRect.width;
+        const maxAllowedY = groupRect.height - noRect.height;
 
-for(let i=0;i<35;i++){
+        const yesRelLeft = yesRect.left - groupRect.left;
+        const yesRelRight = yesRect.right - groupRect.left;
+        const yesRelTop = yesRect.top - groupRect.top;
+        const yesRelBottom = yesRect.bottom - groupRect.top;
 
-let f=document.createElement("div");
+        let safeX, safeY, overlaps;
+        let attempts = 0;
+        const margin = 10;
 
-f.className="firefly";
+        do {
+          safeX = Math.random() * Math.max(0, maxAllowedX);
+          safeY = Math.random() * Math.max(0, maxAllowedY);
 
-f.style.left=Math.random()*window.innerWidth+"px";
+          overlaps = (
+            safeX < (yesRelRight + margin) &&
+            (safeX + noRect.width) > (yesRelLeft - margin) &&
+            safeY < (yesRelBottom + margin) &&
+            (safeY + noRect.height) > (yesRelTop - margin)
+          );
 
-f.style.top=(window.innerHeight-200*Math.random())+"px";
+          attempts++;
+        } while (overlaps && attempts < 80);
 
-f.style.animationDuration=(8+Math.random()*10)+"s";
+        this.btnNo.style.left = `${safeX}px`;
+        this.btnNo.style.top = `${safeY}px`;
+      }
 
-document.body.appendChild(f);
+      handleYesClick() {
+        sfx.playSparkle();
+        this.heartShower.startShower();
+        this.transitionToScreen(this.proposalScreen, this.celebrationScreen);
+      }
+    }
 
-}
-
-document.addEventListener("mousemove",e=>{
-
-let x=(e.clientX-window.innerWidth/2)/40;
-
-document.getElementById("lantern").style.transform=
-`translateX(calc(-50% + ${x}px))`;
-
-});
-
-</script>
-
+    window.addEventListener('DOMContentLoaded', () => new ProposalApp());
+  </script>
 </body>
 </html>
