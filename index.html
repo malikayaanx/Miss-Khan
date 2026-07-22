@@ -1,57 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Mrs. Khan</title>
 
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>For MRS. Khan</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head><body>
-<div id="petals"></div><div class="vignette"></div>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
-<section class="screen show" id="s0">
-<div class="halo"></div>
-<div class="content center">
-<div class="small">A Special Surprise</div>
-<h1>For Mrs. Khan</h1>
-<div class="gold-line"></div>
-<p>Take a moment...</p>
-</div>
-</section>
+<style>
 
-<section class="screen" id="s1">
-<div class="content">
-<p class="type" data-text="Some moments deserve more than a simple message."></p>
-<p class="type delay" data-text="Some deserve a little more time, care and courage."></p>
-<button class="next gold">Continue</button>
-</div>
-</section>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-<section class="screen" id="s2">
-<div class="content">
-<div id="envelope">
-<div class="seal"></div>
-<div class="flap"></div>
-<div class="paper">Open</div>
-</div>
-<p class="hint">Click the envelope</p>
-</div>
-</section>
+body{
 
-<section class="screen" id="s3">
-<div class="content">
-<h2>Mrs. Khan...</h2>
-<p class="question">Would you honor me by going on a date with me?</p>
-<div class="actions">
-<button id="yes" class="gold">YES 🌻</button>
-<button id="no">NO</button>
+background:#050505;
+overflow:hidden;
+font-family:Inter,sans-serif;
+height:100vh;
+color:white;
+
+}
+
+canvas{
+
+position:fixed;
+top:0;
+left:0;
+
+}
+
+#moon{
+
+position:absolute;
+top:80px;
+right:130px;
+
+width:170px;
+height:170px;
+
+border-radius:50%;
+
+background:white;
+
+box-shadow:
+
+0 0 60px rgba(255,255,255,.35),
+0 0 120px rgba(255,255,255,.18),
+0 0 250px rgba(255,255,255,.08);
+
+opacity:.92;
+
+}
+
+#lantern{
+
+position:absolute;
+
+left:50%;
+top:100px;
+
+transform:translateX(-50%);
+
+animation:swing 5s ease-in-out infinite;
+
+}
+
+.rope{
+
+width:2px;
+height:110px;
+background:#777;
+margin:auto;
+
+}
+
+.light{
+
+width:70px;
+height:95px;
+
+border-radius:12px;
+
+background:linear-gradient(#2b2b2b,#151515);
+
+border:2px solid #555;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.light:before{
+
+content:"";
+
+position:absolute;
+
+left:50%;
+top:16px;
+
+transform:translateX(-50%);
+
+width:20px;
+height:45px;
+
+border-radius:50%;
+
+background:#ffd676;
+
+filter:blur(4px);
+
+animation:flicker 1.4s infinite;
+
+}
+
+.glow{
+
+position:absolute;
+
+left:50%;
+top:120px;
+
+transform:translateX(-50%);
+
+width:300px;
+height:300px;
+
+border-radius:50%;
+
+background:radial-gradient(circle,
+rgba(255,220,140,.35),
+rgba(255,220,140,.06),
+transparent);
+
+filter:blur(20px);
+
+animation:pulse 4s infinite;
+
+}
+
+#sign{
+
+position:absolute;
+
+left:50%;
+bottom:120px;
+
+transform:translateX(-50%);
+
+padding:20px 60px;
+
+border:2px solid rgba(198,164,92,.45);
+
+background:rgba(25,18,8,.6);
+
+backdrop-filter:blur(8px);
+
+font-size:42px;
+
+font-family:"Cormorant Garamond",serif;
+
+letter-spacing:3px;
+
+color:#f5e8c6;
+
+opacity:0;
+
+animation:appear 3s forwards;
+
+animation-delay:6s;
+
+}
+
+.firefly{
+
+position:absolute;
+
+width:7px;
+height:7px;
+
+background:#ffe8a3;
+
+border-radius:50%;
+
+box-shadow:0 0 12px gold;
+
+animation:fly linear infinite;
+
+}
+
+@keyframes swing{
+
+0%{transform:translateX(-50%) rotate(-4deg);}
+50%{transform:translateX(-50%) rotate(4deg);}
+100%{transform:translateX(-50%) rotate(-4deg);}
+
+}
+
+@keyframes flicker{
+
+0%{opacity:.8;}
+30%{opacity:1;}
+50%{opacity:.7;}
+80%{opacity:1;}
+100%{opacity:.85;}
+
+}
+
+@keyframes pulse{
+
+0%{transform:translateX(-50%) scale(.95);}
+50%{transform:translateX(-50%) scale(1.06);}
+100%{transform:translateX(-50%) scale(.95);}
+
+}
+
+@keyframes appear{
+
+from{
+
+opacity:0;
+transform:translate(-50%,40px);
+
+}
+
+to{
+
+opacity:1;
+transform:translate(-50%,0);
+
+}
+
+}
+
+@keyframes fly{
+
+from{
+
+transform:translate(0,0);
+
+}
+
+to{
+
+transform:translate(-300px,-150px);
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<div id="moon"></div>
+
+<div id="lantern">
+
+<div class="rope"></div>
+
+<div class="light"></div>
+
+<div class="glow"></div>
+
 </div>
-<div id="end">
-<div class="bouquet">🌻🌻🌻<br>🌻💛🌻<br>🌻🌻🌻</div>
-<h2>Thank You</h2>
-<p>You just made my day.<br>I can't wait to spend time with you.</p>
-<p class="sign">— Ayaan ❤️</p>
+
+<div id="sign">
+
+For Mrs. Khan
+
 </div>
-</div>
-</section>
-<script src="script.js"></script>
-</body></html>
+
+<script>
+
+const canvas=document.getElementById("stars");
+
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+
+for(let i=0;i<250;i++){
+
+stars.push({
+
+x:Math.random()*canvas.width,
+
+y:Math.random()*canvas.height,
+
+r:Math.random()*2,
+
+a:Math.random()
+
+});
+
+}
+
+function draw(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+stars.forEach(s=>{
+
+ctx.beginPath();
+
+ctx.fillStyle="rgba(255,255,255,"+(0.3+Math.random()*0.7)+")";
+
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+
+ctx.fill();
+
+});
+
+requestAnimationFrame(draw);
+
+}
+
+draw();
+
+for(let i=0;i<35;i++){
+
+let f=document.createElement("div");
+
+f.className="firefly";
+
+f.style.left=Math.random()*window.innerWidth+"px";
+
+f.style.top=(window.innerHeight-200*Math.random())+"px";
+
+f.style.animationDuration=(8+Math.random()*10)+"s";
+
+document.body.appendChild(f);
+
+}
+
+document.addEventListener("mousemove",e=>{
+
+let x=(e.clientX-window.innerWidth/2)/40;
+
+document.getElementById("lantern").style.transform=
+`translateX(calc(-50% + ${x}px))`;
+
+});
+
+</script>
+
+</body>
+</html>
