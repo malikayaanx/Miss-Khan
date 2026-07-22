@@ -1,0 +1,29 @@
+
+:root{--bg:#090909;--gold:#c6a45c}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden}
+body{background:var(--bg);color:#f3f3f3;font-family:Inter,sans-serif}
+.vignette{position:fixed;inset:0;background:radial-gradient(circle at center,transparent 35%,#000 100%)}
+body:before{content:"";position:fixed;inset:-25%;background:radial-gradient(circle,rgba(198,164,92,.18),transparent 55%);filter:blur(90px);animation:glow 10s ease-in-out infinite alternate}
+@keyframes glow{to{transform:scale(1.15)}}
+.screen{position:fixed;inset:0;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity 1.4s}
+.show{opacity:1;pointer-events:auto}
+.content{max-width:800px;padding:50px;text-align:center}
+h1,h2{font-family:"Cormorant Garamond",serif;color:var(--gold)}
+h1{font-size:72px}h2{font-size:56px}
+.small{letter-spacing:4px;text-transform:uppercase;color:#ddd}
+.gold-line{width:120px;height:2px;background:var(--gold);margin:20px auto}
+p{font-size:20px;line-height:1.8}
+.gold,#no{padding:14px 36px;border-radius:40px;font-size:18px;border:1px solid rgba(198,164,92,.5)}
+.gold{background:var(--gold);color:#111;cursor:pointer}
+#no{position:fixed;background:#202020;color:#fff}
+#end{display:none}
+.bouquet{font-size:70px;margin-bottom:20px}
+.type{min-height:40px}
+#envelope{width:260px;height:170px;border:2px solid var(--gold);margin:auto;position:relative;cursor:pointer}
+.flap{position:absolute;left:0;top:0;border-left:130px solid transparent;border-right:130px solid transparent;border-top:84px solid #222;transform-origin:top;transition:1.8s}
+.paper{position:absolute;left:18px;right:18px;bottom:8px;height:120px;background:#f6f1e7;color:#111;display:grid;place-items:center;transition:1.8s;transform:translateY(55px)}
+.seal{position:absolute;width:26px;height:26px;background:var(--gold);border-radius:50%;left:50%;top:70px;transform:translateX(-50%);z-index:2}
+.open .flap{transform:rotateX(180deg)}
+.open .paper{transform:translateY(-55px)}
+.petal{position:fixed;top:-50px;font-size:18px;animation:fall linear forwards}
+@keyframes fall{to{transform:translate(var(--dx),110vh) rotate(500deg)}}
